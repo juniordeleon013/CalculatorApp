@@ -2,54 +2,73 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { ButtonCalc } from '../components/ButtonCalc';
 import { styles } from '../theme/appTheme';
+import { useCalculator } from '../hooks/useCalculator';
+
 
 
 export const MainScreen = () => {
+    const { 
+        additionOperation, 
+        subtractionOperation, 
+        multiplicationOperation, 
+        divisionOperation,
+        deleteOneElementResult,
+        positiveNegative,
+        makeResult,
+        cleanResult,
+        calculate,
+        result,
+        previousResult, 
+    } = useCalculator();
+
     return (
         <View style={ styles.calculatorContainer }>
-            <Text style={styles.specialResultText}>1,500.00</Text>
-            <Text style={styles.bigResultText}>1,500.00</Text>
+            <Text style={styles.specialResultText}>{ previousResult !== '0' ? previousResult : '' }</Text>
+            <Text
+                style={styles.bigResultText}
+                numberOfLines={ 1 }
+                adjustsFontSizeToFit>{ result }</Text>
             {/* row buttons */}
             <View style={styles.buttonRow}>
-                <ButtonCalc text="C" color="#9B9B9B" Touch={() => {console.log("c")}}/>
-                <ButtonCalc text="+/-" color="#9B9B9B" Touch={() => {console.log("+/-")}}/>
-                <ButtonCalc text="del" color="#9B9B9B" Touch={() => {console.log("del")}}/>
-                <ButtonCalc text="/" color="#ff9427" Touch={() => {console.log("/")}}/>
+                <ButtonCalc text="C" color="#9B9B9B" Touch={cleanResult}/>
+                <ButtonCalc text="+/-" color="#9B9B9B" Touch={positiveNegative}/>
+                <ButtonCalc text="del" color="#9B9B9B" Touch={deleteOneElementResult}/>
+                <ButtonCalc text="/" color="#ff9427" Touch={divisionOperation}/>
             </View>
             {/* row buttons */}
 
             {/* row buttons */}
             <View style={styles.buttonRow}>
-                <ButtonCalc text="7" Touch={() => {console.log("7")}}/>
-                <ButtonCalc text="8" Touch={() => {console.log("8")}}/>
-                <ButtonCalc text="9" Touch={() => {console.log("9")}}/>
-                <ButtonCalc text="X" color="#ff9427" Touch={() => {console.log("x")}}/>
+                <ButtonCalc text="7" Touch={makeResult}/>
+                <ButtonCalc text="8" Touch={makeResult}/>
+                <ButtonCalc text="9" Touch={makeResult}/>
+                <ButtonCalc text="X" color="#ff9427" Touch={multiplicationOperation}/>
             </View>
             {/* row buttons */}
 
             {/* row buttons */}
             <View style={styles.buttonRow}>
-                <ButtonCalc text="4" Touch={() => {console.log("4")}}/>
-                <ButtonCalc text="5" Touch={() => {console.log("5")}}/>
-                <ButtonCalc text="6" Touch={() => {console.log("6")}}/>
-                <ButtonCalc text="-" color="#ff9427" Touch={() => {console.log("-")}}/>
+                <ButtonCalc text="4" Touch={makeResult}/>
+                <ButtonCalc text="5" Touch={makeResult}/>
+                <ButtonCalc text="6" Touch={makeResult}/>
+                <ButtonCalc text="-" color="#ff9427" Touch={subtractionOperation}/>
             </View>
             {/* row buttons */}
 
             {/* row buttons */}
             <View style={styles.buttonRow}>
-                <ButtonCalc text="1" Touch={() => {console.log("1")}}/>
-                <ButtonCalc text="2" Touch={() => {console.log("2")}}/>
-                <ButtonCalc text="3" Touch={() => {console.log("3")}}/>
-                <ButtonCalc text="+" color="#ff9427" Touch={() => {console.log("+")}}/>
+                <ButtonCalc text="1" Touch={makeResult}/>
+                <ButtonCalc text="2" Touch={makeResult}/>
+                <ButtonCalc text="3" Touch={makeResult}/>
+                <ButtonCalc text="+" color="#ff9427" Touch={additionOperation}/>
             </View>
             {/* row buttons */}
 
             {/* row buttons */}
             <View style={styles.buttonRow}>
-                <ButtonCalc text="0" isZero Touch={() => {console.log("0")}}/>
-                <ButtonCalc text="." Touch={() => {console.log(".")}}/>
-                <ButtonCalc text="=" color="#ff9427" Touch={() => {console.log("=")}}/>
+                <ButtonCalc text="0" isZero Touch={makeResult}/>
+                <ButtonCalc text="." Touch={makeResult}/>
+                <ButtonCalc text="=" color="#ff9427" Touch={calculate}/>
             </View>
             {/* row buttons */}
             

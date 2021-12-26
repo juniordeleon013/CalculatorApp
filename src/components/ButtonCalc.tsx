@@ -6,13 +6,13 @@ interface IButtonCalc {
     text: String,
     color?: String,
     isZero?: Boolean,
-    Touch: Function,
+    Touch: (textNumber : string) => {},
 }
 export const ButtonCalc = ({ text, color = styles.cicleNumberButtonContainer.backgroundColor, Touch, isZero = false } : IButtonCalc) => {
     return (
         <View>
             <TouchableOpacity 
-            onPress={() => Touch()}>
+            onPress={() => Touch(text)}>
                 <View style={{ 
                     ...styles.cicleNumberButtonContainer, 
                     backgroundColor: color,
